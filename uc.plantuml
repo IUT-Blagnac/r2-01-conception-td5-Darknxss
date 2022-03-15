@@ -1,15 +1,25 @@
-@startuml
+@startuml UC
 
-usecase r as "Recenser les \n demandes de stage"
-usecase d as "Déclarer une \n demande de stage"
+usecase gerer as "Gérer"
+usecase gererA as "Gérer un artisan"
+usecase gererC as "Gérer un chantier"
+usecase calculer as "Calculer la paye \n d'un artisan"
+usecase affecter as "Affecter un artisan \n à un chantier"
 
-actor Responsable
+actor Artisan
 actor Entreprise 
 
 'Pour aligner les 2 acteurs :
-r -[hidden]-> d
+gererA -[hidden]-> gererC
 
-Responsable -> r
-Entreprise -> d
+Entreprise -> gerer
+gerer <|- gererA
+gerer <|- gererC
+gererA -> Artisan
+Entreprise -left-> calculer
+Entreprise -up-> affecter
+affecter -> Artisan
+
+skinparam Linetype polyline
 
 @enduml
